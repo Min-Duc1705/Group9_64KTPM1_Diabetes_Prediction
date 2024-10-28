@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, precision_score, recall_score, f1_score
 from sklearn.preprocessing import StandardScaler
 
 # Định nghĩa lớp SimpleSVM
@@ -74,6 +74,27 @@ if training_data_accuracy > test_data_accuracy:
     print("Mô hình hoạt động tốt hơn trên dữ liệu huấn luyện.")
 else:
     print("Mô hình hoạt động tốt hơn trên dữ liệu kiểm tra.")
+
+# Các chỉ số đánh giá bổ sung
+# Ma trận nhầm lẫn (Confusion Matrix)
+cm = confusion_matrix(Y_test, X_test_prediction)
+print('Ma trận nhầm lẫn:')
+print(cm)
+
+# Báo cáo phân loại
+print("\nBáo cáo phân loại:")
+print(classification_report(Y_test, X_test_prediction))
+
+# Tính toán Precision, Recall và F1 Score
+precision = precision_score(Y_test, X_test_prediction)
+recall = recall_score(Y_test, X_test_prediction)
+f1 = f1_score(Y_test, X_test_prediction)
+
+print(f'Precision: {precision}')
+print(f'Recall: {recall}')
+print(f'F1 Score: {f1}')
+
+
 
 # Dự đoán cho dữ liệu đầu vào mới
 input_data = (5,166,72,19,175,25.8,0.587,51)
